@@ -1,0 +1,13 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.menu_title{
+    text-align: center;
+    font-size: 20px;
+    color: rgb(231, 59, 59);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  sans-serif;
+      border-radius: 50%S;
+  
+}

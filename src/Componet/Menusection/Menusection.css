@@ -1,0 +1,215 @@
+.menu-section {
+    background-color: #4a4a4a;
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.menu-title {
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 27px;
+    margin-bottom: 40px;
+    font-weight: 800;
+    border-radius: 50px;
+    border: 2px solid white;
+    align-items: center;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.menu-categories {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0;
+    list-style: none;
+    max-width: 1200px;
+}
+
+.category-item {
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.category-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.category-item.active {
+    background: #e73b3b;
+    border-color: #e73b3b;
+}
+
+.category-item a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+}
+
+.menu-items-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.menu-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(231, 59, 59, 0.5);
+}
+
+.menu-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.menu-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover .menu-image {
+    transform: scale(1.05);
+}
+
+.menu-category-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(231, 59, 59, 0.9);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.menu-content {
+    padding: 20px;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu-item-name {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.menu-item-price {
+    color: #e73b3b;
+    font-size: 22px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.menu-item-description {
+    color: #ddd;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 20px;
+    min-height: 60px;
+}
+
+.menu-actions {
+    text-align: left;
+}
+
+.buy-now-btn {
+    background: linear-gradient(135deg, #e73b3b, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.buy-now-btn:hover {
+    background: linear-gradient(135deg, #ff6b6b, #e73b3b);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(231, 59, 59, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .category-list {
+        gap: 10px;
+    }
+    
+    .category-item {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-title {
+        font-size: 22px;
+        padding: 8px 16px;
+    }
+    
+    .menu-item-name {
+        font-size: 18px;
+    }
+    
+    .menu-item-price {
+        font-size: 18px;
+    }
+}
