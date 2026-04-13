@@ -1,0 +1,113 @@
+.swiper {
+    width: 100% !important;
+
+}
+.amenities_wrapper {
+    max-width: 1100px;   /* control size */
+    margin: 0 auto;      /* center it */
+    padding: 20px;
+}
+
+#amenities {
+    scroll-margin-top: 100px;
+}
+.amenities_item{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 0 25px;
+}
+
+.amenities_item img {
+    width: 60%;
+    height: auto;
+    border-top-right-radius: 350px;
+    border-bottom-right-radius: 350px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.amenities_content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.amenities_content .amenities_book_btn {
+    width: fit-content;
+    padding: 10px 20px;
+    background: #c9a66b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    font: inherit;
+    text-align: center;
+}
+
+.amenities_content .amenities_book_btn:hover {
+    background: #a8894f;
+    color: #fff;
+}
+.amenities_content h3 {
+    font-size: 60px;
+    margin-left: -70px;
+    -webkit-text-stroke: 1px #fff;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1200px) {
+    .amenities_content h2{
+        font-size: 46px;    
+
+    }}
+@media screen and (max-width: 900px) {
+    .amenities_content h2{
+        font-size: 36px;
+        margin-left: 0px;   
+        
+        .amenities_item img {
+             width: 60%;
+    height: auto;
+    border-top-right-radius: 350px;
+    border-bottom-right-radius: 350px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+        }
+    }}
+@media screen and (max-width: 786px) {  
+    .amenities_item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .amenities_item img {
+        width: 100%;
+        border-radius: 30px;
+    height: auto;
+    border-top-right-radius: 350px;
+    border-bottom-right-radius: 350px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    }
+    .amenities_content h3 {
+        font-size: 36px;
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .amenities_content h3 {
+        font-size: 28px;
+        margin-left: 0px;
+    }
+    .amenities_item img {
+       
+    border-top-right-radius: 350px;
+    border-bottom-right-radius: 350px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+}
