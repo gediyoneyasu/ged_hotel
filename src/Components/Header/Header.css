@@ -196,10 +196,10 @@
     left: -100%;
     width: 100%;
     height: calc(100vh - 80px);
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: rgba(12, 10, 10, 0.95);
+    backdrop-filter: blur(6px);
     padding-top: 40px;
-    gap: 20px;
+    gap: 5px;
     transition: left 0.3s ease;
     z-index: 100;
   }
@@ -218,7 +218,8 @@
 
   .nav_wrapper ul li a,
   .nav_wrapper ul li button {
-    font-size: 18px;
+    font-size: 19px;
+  
   }
 
   /* On mobile: show only icon, hide text */
