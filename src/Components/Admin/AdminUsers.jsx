@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import './Admin.css';
@@ -20,7 +21,7 @@ function AdminUsers() {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/users');
+      const res = await fetch(apiUrl('/api/admin/users'));
       const data = await res.json();
       if (data.success) {
         setUsers(data.data);
@@ -35,7 +36,7 @@ function AdminUsers() {
   const deleteUser = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+        const res = await fetch(apiUrl(`/api/admin/users/${id}`), {
           method: 'DELETE'
         });
         const data = await res.json();

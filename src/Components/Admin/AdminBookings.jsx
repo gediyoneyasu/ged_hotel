@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import './Admin.css';
@@ -21,7 +22,7 @@ function AdminBookings() {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch('/api/admin/bookings');
+      const res = await fetch(apiUrl('/api/admin/bookings'));
       const data = await res.json();
       if (data.success) {
         setBookings(data.data);
@@ -35,7 +36,7 @@ function AdminBookings() {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(`/api/admin/bookings/${id}/status`, {
+      const res = await fetch(apiUrl(`/api/admin/bookings/${id}/status`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -52,7 +53,7 @@ function AdminBookings() {
   const deleteBooking = async (id) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       try {
-        const res = await fetch(`/api/admin/bookings/${id}`, {
+        const res = await fetch(apiUrl(`/api/admin/bookings/${id}`), {
           method: 'DELETE'
         });
         const data = await res.json();

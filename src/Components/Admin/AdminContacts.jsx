@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import './Admin.css';
@@ -21,7 +22,7 @@ function AdminContacts() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch('/api/admin/contacts');
+      const res = await fetch(apiUrl('/api/admin/contacts'));
       const data = await res.json();
       if (data.success) {
         setContacts(data.data);
@@ -36,7 +37,7 @@ function AdminContacts() {
   const deleteContact = async (id) => {
     if (window.confirm('Are you sure you want to delete this message?')) {
       try {
-        const res = await fetch(`/api/admin/contacts/${id}`, {
+        const res = await fetch(apiUrl(`/api/admin/contacts/${id}`), {
           method: 'DELETE'
         });
         const data = await res.json();

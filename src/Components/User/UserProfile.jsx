@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import './UserProfile.css';
 
 function UserProfile() {
@@ -34,7 +35,7 @@ function UserProfile() {
   const fetchUserBookings = async (email) => {
     try {
       const token = localStorage.getItem('userToken');
-      const res = await fetch(`http://localhost:5000/api/bookings/me`, {
+      const res = await fetch(apiUrl('/api/bookings/me'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }

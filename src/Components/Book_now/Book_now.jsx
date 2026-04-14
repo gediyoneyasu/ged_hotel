@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Book_now.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import PaymentModal from '../Payment/PaymentModal';
+import { apiUrl } from "../../apiBase.js";
 
 function BookNow() {
   const [step, setStep] = useState(1);
@@ -113,12 +114,12 @@ useEffect(() => {
 
       if (txRef) {
         console.log("Verifying payment for tx_ref:", txRef);
-        const r = await fetch(`http://localhost:5000/api/payment/verify/${encodeURIComponent(txRef)}`);
+        const r = await fetch(apiUrl(`/api/payment/verify/${encodeURIComponent(txRef)}`));
         data = await r.json();
       } else if (bookingRef) {
         // Some Chapa returns may not include tx_ref; verify using booking_ref
         console.log("Verifying payment for booking_ref:", bookingRef);
-        const r = await fetch(`http://localhost:5000/api/payment/verify-by-booking/${encodeURIComponent(bookingRef)}`, {
+        const r = await fetch(apiUrl(`/api/payment/verify-by-booking/${encodeURIComponent(bookingRef)}`), {
           headers: { Authorization: `Bearer ${token}` }
         });
         data = await r.json();
@@ -137,7 +138,7 @@ useEffect(() => {
         }
 
         console.log("Recovering payment return using saved bookingReference:", ref);
-        const r = await fetch(`http://localhost:5000/api/payment/verify-by-booking/${encodeURIComponent(ref)}`, {
+        const r = await fetch(apiUrl(`/api/payment/verify-by-booking/${encodeURIComponent(ref)}`), {
           headers: { Authorization: `Bearer ${token}` }
         });
         data = await r.json();
@@ -172,7 +173,7 @@ useEffect(() => {
           // If page loaded fresh and verify didn't include booking, fetch by reference
           const token = localStorage.getItem('userToken');
           if (token) {
-            const rr = await fetch(`http://localhost:5000/api/bookings/reference/${encodeURIComponent(ref)}`, {
+            const rr = await fetch(apiUrl(`/api/bookings/reference/${encodeURIComponent(ref)}`), {
               headers: { Authorization: `Bearer ${token}` }
             });
             const dd = await rr.json();
@@ -399,7 +400,7 @@ useEffect(() => {
 
     console.log("Sending booking data:", bookingData);
 
-    const res = await fetch("http://localhost:5000/api/bookings", {
+    const res = await fetch(apiUrl("/api/bookings"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

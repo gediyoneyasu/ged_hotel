@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import './Admin.css';
@@ -31,7 +32,7 @@ function AdminRooms() {
 
   const fetchRooms = async () => {
     try {
-      const res = await fetch('/api/rooms');
+      const res = await fetch(apiUrl('/api/rooms'));
       const data = await res.json();
       setRooms(data);
     } catch (error) {
@@ -44,9 +45,9 @@ function AdminRooms() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingRoom 
-        ? `/api/rooms/${editingRoom._id}`
-        : '/api/rooms';
+      const url = editingRoom
+        ? apiUrl(`/api/rooms/${editingRoom._id}`)
+        : apiUrl('/api/rooms');
       
       const method = editingRoom ? 'PUT' : 'POST';
       
@@ -70,7 +71,7 @@ function AdminRooms() {
   const deleteRoom = async (id) => {
     if (window.confirm('Are you sure you want to delete this room?')) {
       try {
-        await fetch(`/api/rooms/${id}`, { method: 'DELETE' });
+        await fetch(apiUrl(`/api/rooms/${id}`), { method: 'DELETE' });
         fetchRooms();
       } catch (error) {
         console.error('Error:', error);

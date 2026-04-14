@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { apiUrl } from '../../apiBase.js'
 import './Contact.css'
 
 function Contact() {
@@ -31,7 +32,7 @@ function Contact() {
     setError('');
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,8 +48,8 @@ function Contact() {
         const looksLikeHtml = raw.trimStart().startsWith('<');
         setError(
           looksLikeHtml
-            ? '❌ The API returned a web page instead of JSON. Stop and restart `npm run dev` in Ged_hotel (proxy must be active), and keep the backend on port 5000. Or use the site at http://127.0.0.1:5000 after `npm run build`.'
-            : '❌ Invalid response from server. Check that the backend is running on port 5000.'
+            ? '❌ The API returned HTML instead of JSON. In dev, run `npm run dev` in Ged_hotel with the backend running (Vite proxy). In production, set VITE_API_URL on Vercel to your API.'
+            : '❌ Invalid response from server. Check the API URL and that the backend is running.'
         );
         return;
       }
@@ -67,7 +68,7 @@ function Contact() {
       }
     } catch (err) {
       console.error('Error:', err);
-      setError('❌ Cannot reach the server. Start the backend (port 5000) and keep `npm run dev` running.');
+      setError('❌ Cannot reach the server. In dev, start the backend and Vite; in production, set VITE_API_URL.');
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import './Admin.css';
 
 function AdminLogin() {
@@ -15,7 +16,7 @@ function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/login', {
+      const res = await fetch(apiUrl('/api/admin/login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ function AdminLogin() {
         setError(data.message || 'Login failed');
       }
     } catch (err) {
-      setError('Server error. Please make sure backend is running on port 5000');
+      setError('Server error. Check that the API is reachable (VITE_API_URL in production).');
     } finally {
       setLoading(false);
     }
@@ -79,7 +80,7 @@ function AdminLogin() {
         
         <div className="admin-login-footer">
           <p>Default: admin@gedhotel.com / admin123</p>
-          <p style={{fontSize: '11px', marginTop: '5px'}}>Make sure backend is running on port 5000</p>
+          <p style={{fontSize: '11px', marginTop: '5px'}}>Production: set VITE_API_URL on Vercel to your API URL.</p>
         </div>
       </div>
     </div>

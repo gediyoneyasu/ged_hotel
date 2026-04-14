@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 import './Admin.css';
@@ -30,7 +31,7 @@ function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/stats');
+      const res = await fetch(apiUrl('/api/admin/stats'));
       const data = await res.json();
       
       if (data.success) {

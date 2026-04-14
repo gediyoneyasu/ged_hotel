@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../apiBase.js';
 
 function PaymentSuccess() {
   const [searchParams] = useSearchParams();
@@ -10,7 +11,7 @@ function PaymentSuccess() {
   useEffect(() => {
     const verifyPayment = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/payment/verify/${bookingRef}`);
+        const response = await fetch(apiUrl(`/api/payment/verify/${encodeURIComponent(bookingRef)}`));
         const data = await response.json();
         
         if (data.success) {

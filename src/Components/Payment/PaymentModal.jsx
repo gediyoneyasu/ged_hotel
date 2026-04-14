@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../../apiBase.js';
 import './PaymentModal.css';
 
 function PaymentModal({ isOpen, onClose, bookingData, onSuccess }) {
@@ -19,7 +20,7 @@ function PaymentModal({ isOpen, onClose, bookingData, onSuccess }) {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/payment/initialize', {
+      const response = await fetch(apiUrl('/api/payment/initialize'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function PaymentModal({ isOpen, onClose, bookingData, onSuccess }) {
       }
     } catch (err) {
       console.error('Payment error:', err);
-      setError('Cannot reach API. Make sure backend is running on port 5000');
+      setError('Cannot reach the API. In development, start the backend and use Vite dev server; in production, set VITE_API_URL on Vercel.');
     } finally {
       setLoading(false);
     }
@@ -81,7 +82,7 @@ function PaymentModal({ isOpen, onClose, bookingData, onSuccess }) {
       const bookingRef = bookingData.bookingReference;
       console.log('Verifying booking:', bookingRef);
       
-      const response = await fetch(`http://localhost:5000/api/payment/verify-manual/${bookingRef}`);
+      const response = await fetch(apiUrl(`/api/payment/verify-manual/${encodeURIComponent(bookingRef)}`));
       const data = await response.json();
       
       console.log('Verification result:', data);
@@ -119,7 +120,9 @@ function PaymentModal({ isOpen, onClose, bookingData, onSuccess }) {
       const bookingRef = bookingData.bookingReference;
       console.log('Force confirming booking:', bookingRef);
       
-      const response = await fetch(`http://localhost:5000/api/payment/force-confirm/${bookingRef}`);
+      const response = await fetch(apiUrl(`/api/payment/force-confirm/${encodeURIComponent(bookingRef)}`), {
+        method: 'POST'
+      });
       const data = await response.json();
       
       console.log('Force confirm result:', data);
