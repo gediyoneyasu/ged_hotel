@@ -12,7 +12,7 @@ import Contact from './Components/Contact/Contact';
 import Book_now from './Components/Book_now/Book_now';
 import Auth from './Components/Auth/Auth';
 import UserProfile from './Components/User/UserProfile';
-import Footer from './Components/Footer/Footer';
+
 
 // Admin Imports - ADD THESE
 import AdminLogin from './Components/Admin/AdminLogin';
@@ -54,7 +54,7 @@ function HomePage() {
       <Amenities />
       <Testimonials />
       <Contact />
-      <Footer />
+    
     </>
   );
 }
