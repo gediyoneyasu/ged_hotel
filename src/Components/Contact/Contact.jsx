@@ -46,10 +46,13 @@ function Contact() {
         data = raw ? JSON.parse(raw) : {};
       } catch {
         const looksLikeHtml = raw.trimStart().startsWith('<');
+        const empty = !raw || !raw.trim();
         setError(
           looksLikeHtml
-            ? '❌ The API returned HTML instead of JSON. In dev, run `npm run dev` in Ged_hotel with the backend running (Vite proxy). In production, set VITE_API_URL on Vercel to your API.'
-            : '❌ Invalid response from server. Check the API URL and that the backend is running.'
+            ? '❌ The API returned HTML instead of JSON. In production: set FRONTEND_URL on Render to your Vercel URL and redeploy the backend (CORS).'
+            : empty
+              ? '❌ Empty response from the server (timeout or proxy). Check Render logs and that the API is awake.'
+              : '❌ Invalid response from server. Often CORS or wrong API URL — set FRONTEND_URL on Render to your exact Vercel URL.'
         );
         return;
       }
@@ -68,7 +71,12 @@ function Contact() {
       }
     } catch (err) {
       console.error('Error:', err);
-      setError('❌ Cannot reach the server. In dev, start the backend and Vite; in production, set VITE_API_URL.');
+      const m = String(err?.message || '');
+      setError(
+        m.includes('Failed to fetch') || m.includes('NetworkError')
+          ? '❌ Browser blocked the request (usually CORS). On Render set FRONTEND_URL to your Vercel URL and redeploy the backend.'
+          : '❌ Cannot reach the server. Check API URL and that the backend is running.'
+      );
     } finally {
       setLoading(false);
     }

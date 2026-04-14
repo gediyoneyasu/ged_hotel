@@ -38,7 +38,19 @@ function Auth() {
         })
       });
 
-      const data = await res.json();
+      const raw = await res.text();
+      let data;
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        const looksLikeHtml = raw.trimStart().startsWith('<');
+        setError(
+          looksLikeHtml
+            ? 'The API returned a web page instead of JSON. Fix CORS on Render: set FRONTEND_URL to your Vercel URL, or redeploy the backend with the latest CORS settings.'
+            : 'Invalid response from the server. Check that the API URL is correct and the backend is running.'
+        );
+        return;
+      }
 
       if (data.success) {
       localStorage.setItem('userToken', data.token);
@@ -49,7 +61,14 @@ function Auth() {
         setError(data.message || 'Login failed');
       }
     } catch (err) {
-      setError('Server error. Please try again.');
+      const m = String(err?.message || '');
+      if (m.includes('Failed to fetch') || m.includes('NetworkError') || m.includes('fetch')) {
+        setError(
+          'Cannot reach the API. If this is your live site: on Render set FRONTEND_URL (or ALLOWED_ORIGINS) to your exact Vercel URL, redeploy the backend, then try again.'
+        );
+      } else {
+        setError('Server error. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -77,7 +96,19 @@ function Auth() {
         })
       });
 
-      const data = await res.json();
+      const raw = await res.text();
+      let data;
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        const looksLikeHtml = raw.trimStart().startsWith('<');
+        setError(
+          looksLikeHtml
+            ? 'The API returned a web page instead of JSON. Fix CORS on Render (FRONTEND_URL = your Vercel URL) and redeploy the backend.'
+            : 'Invalid response from the server. Check API URL and backend.'
+        );
+        return;
+      }
 
       if (data.success) {
         // After successful registration, switch to login form
@@ -93,7 +124,14 @@ function Auth() {
         setError(data.message || 'Registration failed');
       }
     } catch (err) {
-      setError('Server error. Please try again.');
+      const m = String(err?.message || '');
+      if (m.includes('Failed to fetch') || m.includes('NetworkError') || m.includes('fetch')) {
+        setError(
+          'Cannot reach the API. On Render set FRONTEND_URL to your Vercel URL, redeploy backend, then try again.'
+        );
+      } else {
+        setError('Server error. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
