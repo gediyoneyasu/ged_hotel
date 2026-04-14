@@ -6,6 +6,7 @@ import './UserProfile.css';
 function UserProfile() {
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -59,6 +60,8 @@ function UserProfile() {
     navigate('/');
   };
 
+  const formatMoney = (amount) => Number(amount || 0).toFixed(2);
+
   if (loading) {
     return <div className="user-loading">Loading your bookings...</div>;
   }
@@ -103,6 +106,7 @@ function UserProfile() {
                     <th>Guests</th>
                     <th>Total Amount</th>
                     <th>Status</th>
+                    <th>Receipt</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,10 +123,47 @@ function UserProfile() {
                           {booking.status}
                         </span>
                       </td>
+                      <td>
+                        <button
+                          className="receipt-btn"
+                          onClick={() => setSelectedBooking(booking)}
+                        >
+                          View Receipt
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {selectedBooking && (
+            <div className="history-receipt">
+              <div className="history-receipt-header">
+                <h3>Booking Receipt</h3>
+                <div className="history-receipt-actions">
+                  <button className="receipt-btn" onClick={() => window.print()}>
+                    Print
+                  </button>
+                  <button className="receipt-close-btn" onClick={() => setSelectedBooking(null)}>
+                    Close
+                  </button>
+                </div>
+              </div>
+
+              <div className="history-receipt-grid">
+                <p><strong>Reference:</strong> {selectedBooking.bookingReference}</p>
+                <p><strong>Guest:</strong> {selectedBooking.fullName}</p>
+                <p><strong>Email:</strong> {selectedBooking.email}</p>
+                <p><strong>Room:</strong> {selectedBooking.roomType}</p>
+                <p><strong>Check In:</strong> {new Date(selectedBooking.checkIn).toLocaleDateString()}</p>
+                <p><strong>Check Out:</strong> {new Date(selectedBooking.checkOut).toLocaleDateString()}</p>
+                <p><strong>Guests:</strong> {selectedBooking.guests}</p>
+                <p><strong>Payment:</strong> {selectedBooking.paymentMethod || 'chapa'}</p>
+                <p><strong>Status:</strong> {selectedBooking.status}</p>
+                <p><strong>Total Paid:</strong> ${formatMoney(selectedBooking.totalAmount)}</p>
+              </div>
             </div>
           )}
         </div>

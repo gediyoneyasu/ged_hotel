@@ -14,13 +14,18 @@
 }
 
 /* Logo */
-.nav_wrapper .nav_logo a {
+.nav_wrapper .nav_logo a,
+.nav_wrapper .nav_logo button {
   font-size: 25px;
   font-weight: 700;
   color: rgb(212, 148, 11);
   text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
-.nav_wrapper .nav_logo a span {
+.nav_wrapper .nav_logo a span,
+.nav_wrapper .nav_logo button span {
   color: rgb(232, 218, 191);
   font-size: 29px;
 }
@@ -36,15 +41,21 @@
   transition: all 0.3s ease;
 }
 
-.nav_wrapper ul li a {
+.nav_wrapper ul li a,
+.nav_wrapper ul li button {
   color: rgb(210, 210, 195);
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   transition: color 0.3s;
   text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
-.nav_wrapper ul li a:hover {
+.nav_wrapper ul li a:hover,
+.nav_wrapper ul li button:hover {
   color: orange;
 }
 

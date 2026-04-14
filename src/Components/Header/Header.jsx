@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('userToken');
@@ -33,20 +34,37 @@ function Header() {
     closeMenu();
   };
 
+  const handleSectionNavigate = (sectionId) => {
+    closeMenu();
+
+    if (location.pathname !== '/') {
+      sessionStorage.setItem('scrollTarget', sectionId);
+      navigate('/');
+      return;
+    }
+
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <header className="nav_wrapper">
       <div className="nav_logo">
-        <a href="#"><span>Ged-</span>Hotel</a>
+        <button type="button" onClick={() => handleSectionNavigate('home')}>
+          <span>Ged-</span>Hotel
+        </button>
       </div>
 
       <ul className={showMenu ? "showNav" : ""} onClick={closeMenu}>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About us</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#rooms">Rooms</a></li>
-        <li><a href="#amenities">Amenities</a></li>
-        <li><a href="#testimonials">Testimonial</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('home')}>Home</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('about')}>About us</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('services')}>Services</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('rooms')}>Rooms</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('amenities')}>Amenities</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('testimonials')}>Testimonial</button></li>
+        <li><button type="button" onClick={() => handleSectionNavigate('contact')}>Contact</button></li>
         {isLoggedIn && (
           <>
             <li><Link to="/profile" className="mobile-profile">My Profile</Link></li>

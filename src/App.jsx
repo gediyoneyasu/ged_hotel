@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Navbar from './Components/Navbar/Navbar';
@@ -12,6 +12,7 @@ import Contact from './Components/Contact/Contact';
 import Book_now from './Components/Book_now/Book_now';
 import Auth from './Components/Auth/Auth';
 import UserProfile from './Components/User/UserProfile';
+import Footer from './Components/Footer/Footer';
 
 // Admin Imports - ADD THESE
 import AdminLogin from './Components/Admin/AdminLogin';
@@ -23,6 +24,26 @@ import AdminUsers from './Components/Admin/AdminUsers';
 
 
 function HomePage() {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const stateTarget = location.state?.scrollTo;
+    const savedTarget = sessionStorage.getItem('scrollTarget');
+    const targetId = stateTarget || savedTarget;
+
+    if (!targetId) return;
+
+    const scrollTimer = setTimeout(() => {
+      const section = document.getElementById(targetId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      sessionStorage.removeItem('scrollTarget');
+    }, 120);
+
+    return () => clearTimeout(scrollTimer);
+  }, [location.state]);
+
   return (
     <>
       <Header />
@@ -33,6 +54,7 @@ function HomePage() {
       <Amenities />
       <Testimonials />
       <Contact />
+      <Footer />
     </>
   );
 }

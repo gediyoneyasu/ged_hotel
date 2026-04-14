@@ -89,6 +89,64 @@
   border-top: 1px solid #eee;
 }
 
+.receipt-btn {
+  background: #c9a66b;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.receipt-btn:hover {
+  opacity: 0.9;
+}
+
+.receipt-close-btn {
+  background: transparent;
+  border: 1px solid #999;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.history-receipt {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  background: #fffdf8;
+}
+
+.history-receipt-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.history-receipt-header h3 {
+  margin: 0;
+  color: #8a6b3d;
+}
+
+.history-receipt-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.history-receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 20px;
+}
+
+.history-receipt-grid p {
+  margin: 0;
+}
+
 .status-pending {
   background: #fff3e0;
   color: #ff9800;
