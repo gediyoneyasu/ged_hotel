@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Navbar from './Components/Navbar/Navbar';
@@ -63,10 +63,9 @@ function HomePage() {
 }
 
 function App() {
-  const Router = import.meta.env.PROD ? HashRouter : BrowserRouter;
-
+  /* BrowserRouter + Vercel SPA rewrites (vercel.json) — avoids HashRouter URL issues on deploy */
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         {/* Frontend Routes */}
         <Route path="/" element={<HomePage />} />
@@ -81,7 +80,7 @@ function App() {
         <Route path="/admin/contacts" element={<AdminContacts />} />
         <Route path="/admin/users" element={<AdminUsers />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
