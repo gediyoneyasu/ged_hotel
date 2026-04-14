@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Navbar from './Components/Navbar/Navbar';
@@ -38,8 +38,10 @@ function HomePage() {
 }
 
 function App() {
+  const Router = import.meta.env.PROD ? HashRouter : BrowserRouter;
+
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         {/* Frontend Routes */}
         <Route path="/" element={<HomePage />} />
@@ -54,7 +56,7 @@ function App() {
         <Route path="/admin/contacts" element={<AdminContacts />} />
         <Route path="/admin/users" element={<AdminUsers />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
