@@ -65,6 +65,7 @@
 
 .table-responsive {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .booking-table {
@@ -74,6 +75,7 @@
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border-collapse: collapse;
+  min-width: 820px;
 }
 
 .booking-table th {
@@ -208,14 +210,39 @@
 }
 
 @media (max-width: 768px) {
+  .user-profile-container {
+    margin: 90px auto 30px;
+    padding: 0 12px;
+  }
+
   .profile-header {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
   }
   
   .booking-table th,
   .booking-table td {
     padding: 8px 10px;
     font-size: 12px;
+  }
+
+  .history-receipt {
+    padding: 15px;
+  }
+
+  .history-receipt-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .history-receipt-actions {
+    width: 100%;
+  }
+
+  .history-receipt-actions .receipt-btn,
+  .history-receipt-actions .receipt-close-btn {
+    flex: 1;
+    text-align: center;
   }
 }

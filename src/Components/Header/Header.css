@@ -8,6 +8,7 @@
   padding: 0 20px;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 99;
   background-color: rgba(16, 16, 16, 0.4);
   backdrop-filter: blur(20px);
@@ -52,6 +53,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
+  line-height: 1.2;
 }
 
 .nav_wrapper ul li a:hover,
@@ -142,6 +144,43 @@
   .auth-btn span {
     display: inline;
   }
+
+  .nav_wrapper {
+    padding: 0 24px;
+  }
+
+  .nav_wrapper ul {
+    gap: 18px;
+  }
+
+  .nav_wrapper ul li a,
+  .nav_wrapper ul li button {
+    font-size: 17px;
+  }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1450px) {
+  .nav_wrapper {
+    padding: 0 16px;
+  }
+
+  .nav_wrapper ul {
+    gap: 12px;
+  }
+
+  .nav_wrapper ul li a,
+  .nav_wrapper ul li button {
+    font-size: 15px;
+  }
+
+  .nav_btn {
+    gap: 10px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
 }
 
 /* Tablet and Mobile (max-width: 1200px) */
@@ -177,7 +216,8 @@
     width: 100%;
   }
 
-  .nav_wrapper ul li a {
+  .nav_wrapper ul li a,
+  .nav_wrapper ul li button {
     font-size: 18px;
   }
 
@@ -290,12 +330,15 @@
     display: block;
   }
   
-  .mobile-profile a, .mobile-logout {
+  .mobile-profile,
+  .mobile-logout {
     color: #c9a66b !important;
     background: transparent;
     border: none;
     padding: 10px 20px;
     font-size: 18px;
+    text-decoration: none;
+    display: inline-block;
   }
   
   .mobile-logout {
