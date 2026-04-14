@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiUrl } from '../../apiBase.js';
+import Header from '../Header/Header';
 import './UserProfile.css';
 
 function UserProfile() {
@@ -63,10 +64,18 @@ function UserProfile() {
   const formatMoney = (amount) => Number(amount || 0).toFixed(2);
 
   if (loading) {
-    return <div className="user-loading">Loading your bookings...</div>;
+    return (
+      <>
+        <Header />
+        <div className="user-loading">Loading your bookings...</div>
+      </>
+    );
   }
 
   return (
+    <>
+    <Header />
+    <div className="user-profile-page">
     <div className="user-profile-container">
       <div className="profile-header">
         <h1>My Profile</h1>
@@ -169,6 +178,8 @@ function UserProfile() {
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 }
 

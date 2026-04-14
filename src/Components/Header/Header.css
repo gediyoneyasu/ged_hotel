@@ -322,6 +322,39 @@
   display: none;
 }
 
+/* Profile shortcut: visible on tablet/mobile where .user-menu is hidden */
+.nav-profile-icon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #c9a66b, #e8c88a);
+  color: #1a1a1a;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-profile-icon i {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-profile-icon {
+    display: inline-flex;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .nav-profile-icon {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .user-menu {
     display: none;

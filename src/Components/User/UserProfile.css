@@ -1,3 +1,9 @@
+.user-profile-page {
+  min-height: 100vh;
+  background: #fafafa;
+  padding-bottom: 48px;
+}
+
 .user-profile-container {
   max-width: 1100px;
   margin: 100px auto 50px;
@@ -205,8 +211,43 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 100px 20px 40px;
+  box-sizing: border-box;
   font-size: 18px;
   color: #c9a66b;
+  background: #fafafa;
+}
+
+/* Tablet / small laptop */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .user-profile-container {
+    margin: 96px auto 40px;
+    padding: 0 24px;
+  }
+}
+
+/* Desktop and large screens */
+@media (min-width: 1024px) {
+  .user-profile-container {
+    margin: 100px auto 50px;
+    padding: 0 28px;
+  }
+
+  .profile-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .table-responsive {
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@media (min-width: 1440px) {
+  .user-profile-container {
+    max-width: 1200px;
+  }
 }
 
 @media (max-width: 768px) {

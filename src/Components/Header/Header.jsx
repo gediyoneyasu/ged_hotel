@@ -13,10 +13,18 @@ function Header() {
     const token = localStorage.getItem('userToken');
     const user = localStorage.getItem('user');
     if (token && user) {
-      setIsLoggedIn(true);
-      setUserName(JSON.parse(user).name);
+      try {
+        setIsLoggedIn(true);
+        setUserName(JSON.parse(user).name || '');
+      } catch {
+        setIsLoggedIn(false);
+        setUserName('');
+      }
+    } else {
+      setIsLoggedIn(false);
+      setUserName('');
     }
-  }, []);
+  }, [location.pathname]);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -77,15 +85,25 @@ function Header() {
         <Link to="/booking" className="btn">Book Now</Link>
         
         {isLoggedIn ? (
-          <div className="user-menu">
+          <>
+            <Link
+              to="/profile"
+              className="nav-profile-icon"
+              aria-label="My profile"
+              title="My profile"
+            >
+              <i className="ri-user-line"></i>
+            </Link>
+            <div className="user-menu">
             <Link to="/profile" className="user-btn">
               <i className="ri-user-line"></i>
               <span>{userName.split(' ')[0]}</span>
             </Link>
-            <button onClick={handleLogout} className="logout-icon">
+            <button type="button" onClick={handleLogout} className="logout-icon">
               <i className="ri-logout-box-line"></i>
             </button>
-          </div>
+            </div>
+          </>
         ) : (
           <Link to="/auth" className="auth-btn">
             <i className="ri-user-line"></i>
